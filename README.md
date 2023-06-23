@@ -1,1 +1,1 @@
-# RecuGIT_PabloPelaez
+# Copia de contenido del repositorio local al remoto.
