@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Tienda</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+  
+        $(document).ready(function(){
+         	
+            const selectTallas = ['comboTallaCam1','comboTallaPant1'];
+            const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+            const productos = 
+            {
+                "Camiseta diseño perita": ['prod1', 'comboTallaCam1', 'txtnumCam1'],
+                "Pantalón juego verde": ['prod2', 'comboTallaPant1', 'txtnumPant1'],
+            }
+
+            $("#resumenPedido").css("display", "none");
+
+                 
+            populateTallas();                
+           
+            function populateTallas(){
+                
+                for(var j=0; j < selectTallas.length; j++){
+                    var selectActual = document.getElementById(selectTallas[j]);
+                    for(var i = 0; i < tallas.length; i++){
+                        var opc = document.createElement("option");
+                        opc.text = tallas[i];
+                        opc.value = i + 1;
+                        selectActual.add(opc);
+                    }
+                    selectActual.value = "1";
+                    selectActual.text = "XS";
+                }
+            }  
+            
+            function obtenerPedido(){
+                
+                let pedidoHtml = "";
+        
+                for (let prod in productos){
+                    let tallaTxt = $("#" + productos[prod][1] + " option:selected").text();
+                    let cantidadTxt = $("#" + productos[prod][2]).val();
+                    pedidoHtml = "<li id='pedido" + productos[prod][0] + "'>"+ cantidadTxt + " " + prod + " Talla: " + tallaTxt  +"</li>";
+                    $("#lstPedido").append(pedidoHtml);
+                }              
+            }     
+
+        $("button#btnConsulta").click(function(){
+                $("#lstPedido").empty()
+                let nombre = $("#txtNombre").val();
+                let apellidos = $("#txtApellidos").val();
+                let email = $("#txtEmail").val();
+                                             
+                $("p#lblPedido").text(nombre + " " + apellidos + " con email " + email + " realiza el pedido: ");
+                obtenerPedido();
+
+                $("#resumenPedido").css("display", "block");
+            });             
+       });
+
+       </script>
+
+</head>
+<body>
+    <div class="header">
+        <img src="imagenes/logo.png">
+        <h1>Unicaja Baloncesto</h1>
+    </div>
+
+    <div class="row">
+        <div class="column side">
+            <a href="index.html">Inicio</a>
+            <a href="#">Clasificación</a>
+            <a href="plantilla.html">Plantilla</a>
+            <a href="galeria.html">Galería</a>
+            <a href="abonados.html">Abonados</a>
+            <a href="tienda.html">Abonados</a>
+        </div>
+        <div class="column middle" >
+            <div class="contenedor">
+                <div class="elementoTienda">
+                    <h3>Camiseta diseño perita</h3>
+                    <img src="imagenes/camiseta1.jpg">
+                    <label class="labelTextBoxProd">Talla</label><select id="comboTallaCam1"></select>
+                    <label class="labelTextBoxProd">Cantidad</label><input class="textBox" type="text" size="2" maxlength="2" id="txtnumCam1">
+                </div>
+                <div class="elementoTienda">
+                    <h3>Pantalón juego verde</h3>
+                    <img src="imagenes/pantalon1.jpg">
+                    <label class="labelTextBoxProd">Talla</label><select id="comboTallaPant1"></select>
+                    <label class="labelTextBoxProd">Cantidad</label><input class="textBox" type="text" size="2" maxlength="2" id="txtnumPant1">
+                </div>
+                
+                <br>
+                <br>
+            </div>  
+            <div class="pedido">
+                <h2>Datos del pedido</h2>
+                    <div id="textBoxDatos">
+                        <label class="labelTextBox">Nombre</label><input class="textBox" type="text" size="50" id="txtNombre"/>
+                        <br>
+                        <br>
+                        <label class="labelTextBox">Apellidos</label><input class="textBox" type="text" size="50" id="txtApellidos"/>		
+                        <br>
+                        <br>
+                        <label class="labelTextBox">Email</label><input class="textBox" type="text" size="50" id="txtEmail"/>		
+                        <br>
+                        <br>
+                        <br>
+                        <button class="button" id="btnConsulta">Envía</button>   
+                    </div> 
+                <div id="resumenPedido">
+                    <h2>Resumen del pedido</h2>
+                    <p id="lblPedido"></p>
+                    <ul id="lstPedido"></ul>
+                </div>
+            </div>          
+        </div>
+        
+    </div>
+    
+    <div class="footer">
+        <p>&#169; 2021 Unicaja Baloncesto </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Plantilla</title>
+    <meta charset="utf-8">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>    
+
+    $(document).ready(function() {
+
+        
+        // Variables
+        var dict = {
+            "Alberto Díaz" : 'imagenes/alberto.jpg',
+            "Jaime Fernández" : 'imagenes/jaime.jpg',
+            "Darío Brizuela" : 'imagenes/dario.jpg',
+            "Francis Alonso" : "imagenes/francis.jpg",
+            "Jonathan Barreiro" : "imagenes/jonathan.jpg",
+            "Yannick Nzosa" : "imagenes/yannick.jpg"
+        };
+
+
+        $('.imagenPlantilla').click(function(){
+            var idFoto = this.id;
+            $.each(dict, function(key, val) {
+                if (val.indexOf(idFoto) >= 0) {
+                    $('#imagenDestacada').attr('src', val);
+                    $('#lblNombreJugador').text(key);
+                }
+            });
+        });
+
+            // Funciones
+
+            /**
+             * Funcion que cambia la foto en la anterior posicion
+             */
+            /*function retrocederFoto() {
+                if(posicionActual <= 0) {
+                    posicionActual = IMAGENES.length - 1;
+                } else {
+                    posicionActual--;
+                }
+                renderizarImagen();
+            }
+        */
+            
+          
+    }); 
+       
+       </script>
+</head>
+<body>
+    <div class="header">
+        <img src="imagenes/logo.png">
+        <h1>Unicaja Baloncesto</h1>
+    </div>
+
+    <div class="row">
+        <div class="column side">
+            <a href="index.html">Inicio</a>
+            <a href="#">Clasificación</a>
+            <a href="plantilla.html">Plantilla</a>
+            <a href="galeria.html">Galería</a>
+            <a href="abonados.html">Abonados</a>
+            <a href="tienda.html">Tienda</a>
+        </div>
+        <div class="column middle" >
+            <div class="contenedor">
+                <div class="elemento"><input type="image" class="imagenPlantilla" id="alberto" src="imagenes/albertoFront.jpg"/></div>
+                <div class="elemento"><input type="image" class="imagenPlantilla" id="jaime" src="imagenes/jaimeFront.jpg"/></div>
+                <div class="elemento"><input type="image" class="imagenPlantilla" id="dario" src="imagenes/darioFront.jpg"/></div>             
+                <div class="elemento"><input type="image" class="imagenPlantilla" id="francis" src="imagenes/francisFront.jpg"/></div>    
+                <div class="elemento"><input type="image" class="imagenPlantilla" id="yannick" src="imagenes/yannickFront.jpg"/></div>                      
+                <div class="elemento"><input type="image" class="imagenPlantilla" id="jonathan" src="imagenes/jonathanFront.jpg"/></div>  
+            </div>  
+            <div class="destacado">
+                <h2 id="lblNombreJugador"></h2><br>
+                <img id="imagenDestacada" src="imagenes/logo.png"/>
+            </div>
+        </div> 
+        
+    </div>
+    <div class="footer">    
+        <p>&#169; 2021 Unicaja Baloncesto </p>
+    </div>
+</body>
+</html>

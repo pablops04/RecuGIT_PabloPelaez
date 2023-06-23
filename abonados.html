@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Abonados</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+  
+        $(document).ready(function(){
+         	
+            const selectLocalidad = document.getElementById("comboLocalidad");
+            
+            const localidades = ['Alhaurín de la Torre', 'Antequera', 'Benalmádena', 'Coín', 
+                        'Estepona', 'Fuengirola', 'Málaga', 'Marbella'];
+
+                 
+            populateLocalidad();                
+           
+            function populateLocalidad(){
+                
+                for(var i = 0; i < localidades.length; i++){
+                    var opc = document.createElement("option");
+                    opc.text = localidades[i];
+                    opc.value = i + 1;
+                    selectLocalidad.add(opc);
+                }
+                selectLocalidad.value = "1";
+                selectLocalidad.text = "Alhaurín de la Torre";
+            }        
+        
+
+        $("button#btnConsulta").click(function(){
+                var seleccionados = [];   
+                var nombre = $("#txtNombre").val();
+                var apellidos = $("#txtApellidos").val();
+                var email = $("#txtEmail").val();
+                                
+                $.each($("input[type='radio']:checked"), function(){            
+                    seleccionados.push($(this).val());
+                });
+           
+                $.each($("#comboLocalidad option:selected"), function(){            
+                    seleccionados.push($(this).text());
+                });
+
+               
+                $("p#peticionAbono").text("El abonado " + nombre + " " + apellidos + 
+                    " con email " + email +  " residente en " + seleccionados.pop($(this).val) + " "+
+                    seleccionados.pop($(this).val) +" desea renovar su abono");
+            });             
+       });
+
+       </script>
+
+</head>
+<body>
+    <div class="header">
+        <img src="imagenes/logo.png">
+        <h1>Unicaja Baloncesto</h1>
+    </div>
+
+    <div class="row">
+        <div class="column side">
+            <a href="index.html">Inicio</a>
+            <a href="#">Clasificación</a>
+            <a href="plantilla.html">Plantilla</a>
+            <a href="galeria.html">Galería</a>
+            <a href="abonados.html">Abonados</a>
+            <a href="tienda.html">Tienda</a>
+        </div>
+        <div class="column middle" >
+            <div id="textBoxDatos">
+                <h2>Datos de contacto</h2>
+                <label class="labelTextBox">Nombre</label><input class="textBox" type="text" size="50" id="txtNombre"/>
+                <br>
+                <br>
+                <label class="labelTextBox">Apellidos</label><input class="textBox" type="text" size="50" id="txtApellidos"/>		
+                <br>
+                <br>
+                <label class="labelTextBox">Email</label><input class="textBox" type="text" size="50" id="txtEmail"/>		
+                <br>
+                <br>
+                <label><b>Lugar de residencia</b></label>
+                <br>
+                <br>
+                <label class="labelLocalidad">Localidad</label><select id="comboLocalidad"></select>
+            </div>  
+            <div id="radioRenovacion">
+                <h2>¿Desea renovar su abono de temporada?</h2>
+                    <input type="radio" name="renovar" value="Si"> <b>SÍ</b> deseo renovar mi abono.</input><br>
+                    <input type="radio" name="renovar" value="No"> <b>NO</b> deseo renovar mi abono.</input><br>
+                <br>
+                <br>
+                <button class="button" id="btnConsulta">Envía</button>   
+            </div>
+            <div clas="columna">
+                <h2>Renovación abono</h2>
+                <p id="peticionAbono"></p>          
+            </div>
+        </div>
+        
+    </div>
+    <div class="footer">
+        <p>&#169; 2021 Unicaja Baloncesto </p>
+    </div>
+</body>
+</html>
